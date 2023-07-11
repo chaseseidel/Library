@@ -8,6 +8,46 @@
     <script src="./js/script.js" defer></script>
 </head>
 <body>
-    
+    <div class="top-bar">
+        <div class="logo">
+            <img src="" alt="" id="logo-picture">
+            <h1 id="logo-text">Library</h1>
+        </div>
+        <div class="ui-add">
+            <button id="add-button">+ Add Book</button>
+        </div>
+    </div>
+    <div class="book-display-box">
+        <div class="book-card">
+        </div>
+    </div>
+    <div class="add-book-modal">
+        <div class="overlay"></div>
+        <div class="add-book-form">
+            <div class="close-btn">&times;</div>
+            <form action="#">
+                <div class="input">
+                    <label for="title">Title</label>
+                    <input type="text" name="title" id="title">
+                </div>
+                <div class="input">
+                    <label for="author">Author</label>
+                    <input type="text" name="author" id="author">
+                </div>
+                <div class="input">
+                    <label for="pages">Pages</label>
+                    <input type="number" name="pages" id="pages">
+                </div>
+                <div class="input">
+                    <label for="read-status">Have you read this book?</label>
+                    <select name="read-status" id="read-status">
+                        <option value="yes">Yes</option>
+                        <option value="no">No</option>
+                    </select>
+                </div>
+                <button type="submit" id="submit-btn">Submit</button>
+            </form>
+        </div>
+    </div>
 </body>
 </html>
