@@ -1,6 +1,6 @@
 //-------------------------DOCUMENT VARIABLES-------------------------//
 const bookGrid = document.querySelector('.book-display-box');
-const addBookButton = document.querySelector('#add-button');
+const addBookButton = document.querySelector('#add-btn');
 const addBookModal = document.querySelector('.add-book-modal');
 const closeBookButton = document.querySelector('.close-btn');
 const overlay = document.querySelector('.overlay');
@@ -21,27 +21,43 @@ overlay.addEventListener('click', () => {
 
 submitButton.addEventListener('click', () => {
     addBookToLibrary(createBook());
-    displayBooks();
+    resetBookGrid();
+    createBookGrid();
+    resetForm();
     togglePopup();
+    libraryIndex += 1;
 })
 
 //-------------------------DATA VARIABLES-------------------------//
 let libraryIndex = 0;
-
-//-------------------------DATA STRUCTURES-------------------------//
 let library = [];
 
-function Book(title, author, pages, read, index) {
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-    this.read = read;
-    this.index = index;
+//-------------------------DATA STRUCTURES-------------------------//
+class Book {
+    constructor(title, author, pages, read, index) {
+        this.title = title;
+        this.author = author;
+        this.pages = pages;
+        this.read = read;
+        this.index = index;
+    }
 }
+
+//-------------------------LIBRARY FUNCTIONS-------------------------//
 
 function addBookToLibrary(book) {
     library.push(book);
 }
+
+function markAsRead(index) {
+    library[index].read === true ? library[index].read = false : library[index].read = true;
+}
+
+function deleteBook(index) {
+    delete library[index];
+}
+
+//-------------------------BOOK GRID FUNCTIONS-------------------------//
 
 function createBook() {
     const title = document.getElementById('title').value;
@@ -75,6 +91,7 @@ function createBookCard(book) {
         read.classList.toggle('read');
     }
     read.addEventListener('click', () => {
+        markAsRead(book.index);
         if (read.textContent === 'Not Read') {
             read.textContent = 'Read';
             read.classList.toggle('read');
@@ -85,7 +102,11 @@ function createBookCard(book) {
     })
     remove.textContent = 'Remove';
     remove.classList.add('remove-btn');
-    
+    remove.addEventListener('click', () => {
+        deleteBook(book.index);
+        bookGrid.removeChild(bookCard);
+    })
+
     bookCard.appendChild(title);
     bookCard.appendChild(author);
     bookCard.appendChild(pages);
@@ -95,12 +116,25 @@ function createBookCard(book) {
     bookCard.classList.add('book-card');
 }
 
-function togglePopup() {
-    addBookModal.classList.toggle('active');
-}
-
 function resetBookGrid() {
     while (bookGrid.firstChild) {
         bookGrid.removeChild(bookGrid.firstChild);
     }
+}
+
+//-------------------------FORM POPUP FUNCTIONS-------------------------//
+
+function togglePopup() {
+    addBookModal.classList.toggle('active');
+}
+
+function resetForm() {
+    const title = document.getElementById('title');
+    const author = document.getElementById('author');
+    const pages = document.getElementById('pages');
+    const read = document.getElementById('read-status');
+    title.value = '';
+    author.value = '';
+    pages.value = '';
+    read.checked = false;
 }
