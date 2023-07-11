@@ -10,44 +10,39 @@
 <body>
     <div class="top-bar">
         <div class="logo">
-            <img src="" alt="" id="logo-picture">
+            <img src="./img/book .png" alt="Book logo" id="logo-picture">
             <h1 id="logo-text">Library</h1>
         </div>
-        <div class="ui-add">
-            <button id="add-button">+ Add Book</button>
-        </div>
     </div>
-    <div class="book-display-box">
-        <div class="book-card">
+    <section class="main-content">
+        <button id="add-button">+ Add Book</button>
+        <div class="book-display-box">
+            <div class="book-card">
+            </div>
         </div>
-    </div>
-    <div class="add-book-modal">
-        <div class="overlay"></div>
-        <div class="add-book-form">
-            <div class="close-btn">&times;</div>
-            <form action="#">
-                <div class="input">
-                    <label for="title">Title</label>
-                    <input type="text" name="title" id="title">
-                </div>
-                <div class="input">
-                    <label for="author">Author</label>
-                    <input type="text" name="author" id="author">
-                </div>
-                <div class="input">
-                    <label for="pages">Pages</label>
-                    <input type="number" name="pages" id="pages">
-                </div>
-                <div class="input">
-                    <label for="read-status">Have you read this book?</label>
-                    <select name="read-status" id="read-status">
-                        <option value="yes">Yes</option>
-                        <option value="no">No</option>
-                    </select>
-                </div>
-                <button type="submit" id="submit-btn">Submit</button>
-            </form>
+        <div class="add-book-modal">
+            <div class="overlay"></div>
+            <div class="add-book-form">
+                <div class="form-text">Add New Book</div>
+                <div class="close-btn">&times;</div>
+                <form action="#" class="form">
+                    <div class="input">
+                        <input type="text" name="title" id="title" placeholder="Title">
+                    </div>
+                    <div class="input">
+                        <input type="text" name="author" id="author" placeholder="Author">
+                    </div>
+                    <div class="input">
+                        <input type="number" name="pages" id="pages" placeholder="Pages">
+                    </div>
+                    <div class="input">
+                        <label for="read-status">Have you read this book?</label>
+                        <input type="checkbox" name="read-status" id="read-status">
+                    </div>
+                </form>
+                <button type="submit" id="submit-btn">Add</button>
+            </div>
         </div>
-    </div>
+    </section>
 </body>
 </html>
