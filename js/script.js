@@ -20,17 +20,13 @@ overlay.addEventListener('click', () => {
 })
 
 submitButton.addEventListener('click', () => {
-    addBookToLibrary(createBook());
+    library.addBookToLibrary(createBook());
     resetBookGrid();
     createBookGrid();
     resetForm();
     togglePopup();
-    libraryIndex += 1;
+    library.index += 1;
 })
-
-//-------------------------DATA VARIABLES-------------------------//
-let libraryIndex = 0;
-let library = [];
 
 //-------------------------DATA STRUCTURES-------------------------//
 class Book {
@@ -43,19 +39,36 @@ class Book {
     }
 }
 
-//-------------------------LIBRARY FUNCTIONS-------------------------//
+class Library {
+    constructor() {
+        this.books = [];
+        this.index = 0;
+    }
 
-function addBookToLibrary(book) {
-    library.push(book);
+    addBookToLibrary(book) {
+        this.books.push(book);
+    }
+
+    markAsRead(index) {
+        this.books[index].read === true ? this.books[index].read = false : this.books[index].read = true;
+    }
+
+    deleteBook(index) {
+        delete this.books[index];
+    }
+
+    set Index(index) {
+        this.index = index;
+    }
+
+    get Index() {
+        return this.index;
+    }
 }
 
-function markAsRead(index) {
-    library[index].read === true ? library[index].read = false : library[index].read = true;
-}
+//-------------------------DATA VARIABLES-------------------------//
 
-function deleteBook(index) {
-    delete library[index];
-}
+const library = new Library();
 
 //-------------------------BOOK GRID FUNCTIONS-------------------------//
 
@@ -64,12 +77,12 @@ function createBook() {
     const author = document.getElementById('author').value;
     const pages = document.getElementById('pages').value;
     const read = document.getElementById('read-status').checked;
-    const index = libraryIndex;
+    const index = library.index;
     return new Book(title, author, pages, read, index);
 }
 
 function createBookGrid() {
-    library.forEach(book => createBookCard(book));
+    library.books.forEach(book => createBookCard(book));
 }
 
 function createBookCard(book) {
@@ -91,7 +104,7 @@ function createBookCard(book) {
         read.classList.toggle('read');
     }
     read.addEventListener('click', () => {
-        markAsRead(book.index);
+        library.markAsRead(book.index);
         if (read.textContent === 'Not Read') {
             read.textContent = 'Read';
             read.classList.toggle('read');
@@ -103,7 +116,7 @@ function createBookCard(book) {
     remove.textContent = 'Remove';
     remove.classList.add('remove-btn');
     remove.addEventListener('click', () => {
-        deleteBook(book.index);
+        library.deleteBook(book.index);
         bookGrid.removeChild(bookCard);
     })
 
