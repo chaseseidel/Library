@@ -20,22 +20,22 @@
             <div class="add-book-form">
                 <div class="form-text">Add New Book</div>
                 <div class="close-btn">&times;</div>
-                <form action="#" class="form">
+                <form action="#" method="get" class="form">
                     <div class="input">
-                        <input type="text" name="title" id="title" placeholder="Title">
+                        <input type="text" name="title" id="title" placeholder="Title" required>
                     </div>
                     <div class="input">
-                        <input type="text" name="author" id="author" placeholder="Author">
+                        <input type="text" name="author" id="author" placeholder="Author" required>
                     </div>
                     <div class="input">
-                        <input type="number" name="pages" id="pages" placeholder="Pages">
+                        <input type="number" name="pages" id="pages" placeholder="Pages" required min="1">
                     </div>
                     <div class="input">
                         <label for="read-status">Have you read this book?</label>
                         <input type="checkbox" name="read-status" id="read-status">
                     </div>
+                    <button type="submit" id="submit-btn">Add</button>
                 </form>
-                <button type="submit" id="submit-btn">Add</button>
             </div>
         </div>
     </section>
